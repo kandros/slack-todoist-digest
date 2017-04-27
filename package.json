@@ -1,0 +1,14 @@
+{
+  "name": "slack-todoist-digest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/client": "^3.9.0",
+    "dotenv": "^4.0.0",
+    "is-markdown-link": "^1.0.1",
+    "lodash": "^4.17.4",
+    "marked": "^0.3.6",
+    "todoist-js": "^0.3.0"
+  }
+}

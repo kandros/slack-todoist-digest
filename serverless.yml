@@ -1,0 +1,26 @@
+service: slack-todoist-digest
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: eu-central-1
+
+custom:
+  secrets: ${file(./secrets.yml)}
+
+functions:
+  nextActions:
+    handler: functions/next-actions.handle
+    environment:
+      SLACK_WEBHOOK_URL: ${self:custom.secrets.SLACK_WEBHOOK_URL}
+      TODOIST_API_TOKEN: ${self:custom.secrets.TODOIST_API_TOKEN}
+    events:
+      - schedule: cron(30 8 * * ? *)
+
+  emails:
+    handler: functions/emails.handle
+    environment:
+      SLACK_WEBHOOK_URL: ${self:custom.secrets.SLACK_WEBHOOK_URL}
+      TODOIST_API_TOKEN: ${self:custom.secrets.TODOIST_API_TOKEN}
+    events:
+      - schedule: cron(30 8 * * ? *)
