@@ -9,8 +9,9 @@ exports.createNextActionAttachment = function (task) {
     if (isMarkdownLink(task.content)) {
         const matchMarkdownLink = /(?:__|[*#])|\[(.*?)\]\(.*?\)/
         const markdownLink = task.content.match(matchMarkdownLink)[0]
+        const rest = task.content.replace(markdownLink, '')
         const link = extractLink(markdownLink)
-        title = link.text
+        title = link.text + ' ' + rest
         titleLink = link.href
     }
 
@@ -21,8 +22,8 @@ exports.createNextActionAttachment = function (task) {
         author_name: task.project_name,
         // "author_link": "http://flickr.com/bobby/",
         // "author_icon": "images/td_logo.svg",
-        title: 'title',
-        // title_link: titleLink
+        title: title,
+        title_link: titleLink
         // "text": action.project_name,
         // "fields": [
         //     {
